@@ -1,27 +1,29 @@
 import cv2
 import define
-import math
+import draw
 
+capt = define.init_camera()
 
-if not define.capt.isOpened():
-    print("Cannot open camera")
+if not capt.isOpened():
+    print(define.msg_err_01)
     exit()
 
 print(define.msg_start)
 
 while True:
-    ret, frame = define.capt.read()
-
+    ret, frame = capt.read()
+    
     if not ret:
-        print("ไม่สามารถรับภาพจากกล้องได้ (Can't receive frame)")
+        print(define.msg_err_02)
         break
     
-    cv2.rectangle(frame, (50, 10), (200, 50), define.NEON_GREEN, 2)
+    frame = draw.draw_line(frame)
+    frame = draw.draw_reg(frame)
     cv2.imshow("PROGRAM", frame)
-    if cv2.waitKey(1) == define.button :
+    if cv2.waitKey(1) == define.button:
         break
 
-print("Bye Bye !!!")
+print(define.msg_exit)
 
-define.capt.release()
+capt.release()
 cv2.destroyAllWindows()
