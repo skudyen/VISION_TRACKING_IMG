@@ -1,9 +1,17 @@
 import cv2
 import math
 
+# DEFINE COLORS and THICKNESS
+GREEN = (100, 235, 52)
+BLUE = (255, 10, 10)
+RED = (0, 0, 255)
+
+# MODEL PATH
+MODEL_PATH = "import_model/best.pt"
+
 # DEFINE POSITION,DISPLAY,SIZE
-DISP_WID = 1920
-DISP_HEI = 1080
+DISP_WID = 640
+DISP_HEI = 480
 
 RT_TOPC = (200, 100)
 RT_UNDC = (450, 350)
@@ -19,8 +27,8 @@ def init_camera():
     if not capt.isOpened():
         capt = cv2.VideoCapture(1, cv2.CAP_V4L2)
     
-    capt.set(cv2.CAP_PROP_FRAME_HEIGHT, DISP_WID)
-    capt.set(cv2.CAP_PROP_FRAME_WIDTH, DISP_HEI)
+    capt.set(cv2.CAP_PROP_FRAME_WIDTH, DISP_WID)
+    capt.set(cv2.CAP_PROP_FRAME_HEIGHT, DISP_HEI)
 
     return capt
 
@@ -30,11 +38,6 @@ def init_camera():
 
 # set_wid = capt.set(cv2.CAP_PROP_FRAME_HEIGHT, DISP_WID)
 # set_hei = capt.set(cv2.CAP_PROP_FRAME_WIDTH, DISP_HEI)
-
-# DEFINE COLORS and THICKNESS
-GREEN = (100, 235, 52)
-BLUE = (255, 10, 10)
-RED = (224, 31, 31)
 
 # MESSAGE TEXT
 msg_start = (

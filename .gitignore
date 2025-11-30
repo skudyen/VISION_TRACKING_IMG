@@ -1,2 +1,3 @@
 install_venv/
 __pycache__/
+import_model/best.pt
