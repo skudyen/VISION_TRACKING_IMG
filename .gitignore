@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+/install_venv
+=======
+install_venv/
+__pycache__/
+import_model/best.pt
+>>>>>>> 513b46f72004df492296fc7248ca3832ce9a7739
