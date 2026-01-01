@@ -1,7 +1,7 @@
 import cv2
 import os
 import numpy as np
-import define
+from . import define
 
 class PhotoCollector:
     def __init__(self, folder="photo"):

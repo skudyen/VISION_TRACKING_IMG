@@ -7,19 +7,21 @@ from modules.modes import ModeManager
 from modules.detect import ObjectDetector
 from modules.getphoto import PhotoCollector
 from modules.serials import SerialHandler
-from modules.getlog import LogMonitor 
+from modules.getlog import LogMonitor
 
 class SmartCamApp:
     def __init__(self):
-        define.clear_screen()
-        print(define.msg_header)
+        # ไม่ต้อง print header ตรงนี้แล้ว เพราะเดี๋ยวโดน detector ลบทิ้ง
+        # define.clear_screen() <--- ลบออก
+        # print(define.msg_header) <--- ลบออก
 
         self.setup_camera()
         self.serial = SerialHandler()
         self.modes = ModeManager()
         self.detector = ObjectDetector(serial_handler=self.serial) 
         self.collector = PhotoCollector()
-        self.logger = LogMonitor(self.serial) 
+        self.logger = LogMonitor(self.serial)
+        
         self.running = True
 
     def setup_camera(self):
@@ -42,6 +44,12 @@ class SmartCamApp:
 
         cv2.namedWindow("PROGRAM", cv2.WINDOW_NORMAL)
 
+        # --- แก้ตรงนี้ครับ! ---
+        # หลังจากโหลดทุกอย่างเสร็จแล้ว ให้เคลียร์จอแล้วโชว์ Guide ค้างไว้เลย
+        define.clear_screen()
+        print(define.msg_header)
+        # -------------------
+
         while self.running:
             ret, frame = self.cap.read()
             if not ret:
@@ -62,7 +70,6 @@ class SmartCamApp:
                 
                 if current_mode == ModeManager.LOG:
                     final_frame = self.logger.process(final_frame, obj_name)
-                    
                 else:
                     final_frame = draw.draw_line(final_frame)
                     final_frame = draw.draw_reg(final_frame, obj_name)
@@ -80,7 +87,7 @@ class SmartCamApp:
     def cleanup(self):
         self.cap.release()
         cv2.destroyAllWindows()
-        print("\n") 
+        print("\n")
         print(define.msg_exit)
         time.sleep(2)
         define.clear_screen()

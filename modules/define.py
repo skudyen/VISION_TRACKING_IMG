@@ -6,7 +6,7 @@ GREEN = (100, 235, 52)
 BLUE = (255, 10, 10)
 RED = (0, 0, 255)
 ORANGE = (0, 165, 255)
-
+YELLOW = (0, 255, 255)
 # --- TERMINAL COLORS ---
 T_GREEN = "\033[32m"
 T_BLUE = "\033[34m"
